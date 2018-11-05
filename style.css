@@ -1,25 +1,82 @@
+ul,ol{list-style: none;}
+*{margin: 0;padding: 0}
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
 #xxx{
-    background:green;
+    background:white;
     display:block;
-  }
-  body{
-    margin:0px;
-  }
-  html{
-  
-  }
-  .actions{
+}
+body{
+    overflow: hidden;
+}
+.actions{
     position:fixed;
     left:0;
-    bottom:0;
-  }
-  .actions > #brush{
-    display:none;
-  }
-  
-  .actions.x > #brush{
-    display:inline-block;
-  }
-  .actions.x > #eraser{
-    display:none;
-  }
+    top:0;
+    padding: 10px;
+}
+.actions svg{
+    width: 1.5em;
+    height: 1.5em;
+    transition: all 0.3s;
+    /* 这一句加上之后就能实现需要放大的就慢慢放大，移开之后需要缩小就慢慢缩小 */
+    margin: 0 10px;
+}
+.actions svg.active{
+    fill: red;
+    transform: scale(1.2);
+    /* 点击选中之后就会出现放大1.2倍的现象 */
+}
+.colors{
+    position: fixed;
+    left: 20px;
+    top: 45px;
+}
+.colors > li{
+    width: 20px;
+    height: 20px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    margin: 10px 0;
+    transition: all 0.3s;
+    /* 此处的选中转换样式可以借鉴上面的画笔和橡皮檫的写法 */
+}
+.colors > li.black{
+    background: black;
+}
+.colors > li.red{
+    background: red;
+}
+.colors > li.green{
+    background: green;
+}
+.colors > li.blue{
+    background: blue;
+}
+.colors > li.active{
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.95);
+    transform: scale(1.2);
+    /* 此处的选中转换样式可以借鉴上面的画笔和橡皮檫的写法 */
+}
+.sizes{
+    position: fixed;
+    right: 20px;
+    top: 10px;
+}
+.sizes > li{
+    margin: 20px;
+}
+.sizes .thin{
+    height: 0;
+    width: 20px;
+    border-top: 3px solid black;
+}
+.sizes .thick{
+    height: 0;
+    widows: 20px;
+    border-top: 6px solid black;
+}

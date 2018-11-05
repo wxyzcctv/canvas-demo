@@ -1,19 +1,75 @@
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');
+var lineWidth = 5
 
 autoCanvasSize(yyy)
 
 listenToUser(yyy)
 
 var eraserEnable = false
-eraser.onclick = function(){
-  eraserEnable = true
-  actions.className = 'actions x'
+eraser.onclick = function(){    //这里就是实现点击画笔的时候橡皮檫就熄灭，橡皮檫点击的时候画笔熄灭
+    eraserEnable = true
+    eraser.classList.add('active')
+    bush.classList.remove('active')
 }
-brush.onclick = function(){
-  eraserEnable = false
-  actions.className = 'actions'
+bush.onclick = function(){
+    eraserEnable = false
+    bush.classList.add('active')
+    eraser.classList.remove('active')
 }
+black.onclick = function(){
+    context.fillStyle = 'black'
+    context.strokeStyle = 'black'
+    black.classList.add('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    blue.classList.remove('active')
+}
+red.onclick =function(){        //这里也有点击的功能吗，这样都行
+    context.fillStyle = 'red'
+    context.strokeStyle = 'red'
+    black.classList.remove('active')
+    red.classList.add('active')
+    green.classList.remove('active')
+    blue.classList.remove('active')
+}
+green.onclick =function(){
+    context.fillStyle = 'green'
+    context.strokeStyle = 'green'
+    black.classList.remove('active')
+    red.classList.remove('active')
+    green.classList.add('active')
+    blue.classList.remove('active')
+}
+blue.onclick =function(){
+    context.fillStyle = 'blue'
+    context.strokeStyle = 'blue'
+    black.classList.remove('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    blue.classList.add('active')
+}
+thin.onclick =function(){
+    lineWidth = 5
+}
+thick.onclick =function(){
+    lineWidth = 10
+}
+clear.onclick = function(){
+    context.clearRect(0, 0, yyy.clientWidth, yyy.clientHeight)
+    // 全屏清除的时候只需要将清除范围设置为全屏范围就行
+}
+download.onclick = function(){
+    var url = yyy.toDataURL("image/png")
+    // 图片的形式就是通过二进制代码的形式展示出来
+    var a = document.createElement('a')
+    document.body.appendChild(a)
+    a.href = url
+    a.download = '我的画儿'
+    a.target = '_blank'
+    a.click()
+}
+
 
 function  autoCanvasSize(canvas){
   setCanvasSize()
@@ -31,16 +87,14 @@ function  autoCanvasSize(canvas){
 }
 function drawCircle(x,y,radius){
   context.beginPath()
-  context.fillStyle = 'black'
   context.arc(x,y,radius,0,Math.PI*2);
   context.fill();
 }
 
 function drawLine(x1,y1,x2,y2){
   context.beginPath();
-  context.strokeStyle = 'black'
   context.moveTo(x1,y1)
-  context.lineWidth = 5
+  context.lineWidth = lineWidth
   context.lineTo(x2,y2)
   context.stroke()
   context.closePath();
